@@ -124,6 +124,29 @@
         .scroll-nav a:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        /* Carrusel de imágenes */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+            margin-bottom: 40px;
+        }
+        
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
         
         /* Banner/Slide */
         .main-banner {
@@ -390,6 +413,23 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-icon {
+            color: var(--color-blanco);
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--color-secundario);
+        }
         
         /* Responsive */
         @media (max-width: 768px) {
@@ -428,6 +468,10 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .carousel-container {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -458,6 +502,19 @@
                 <li><a href="https://bryantkd52.github.io/FinalProyectoIII-configuracion/">Configuración</a></li>
                 <li><a href="https://bryantkd52.github.io/FinalProyectoIII-soporte/">Soporte</a></li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Carrusel de imágenes -->
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-slide" style="background-image: url('imagen1.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen2.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen3.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen4.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen5.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen6.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('imagen7.jpg')"></div>
         </div>
     </div>
 
@@ -592,11 +649,39 @@
     <footer>
         <div class="container">
             <div class="footer-logo">OptiWeb</div>
+            <div class="social-icons">
+                <a href="#" class="social-icon">&#xf09a;</a> <!-- Facebook -->
+                <a href="#" class="social-icon">&#xf232;</a> <!-- WhatsApp -->
+                <a href="#" class="social-icon">&#xf16d;</a> <!-- Instagram -->
+            </div>
             <p>&copy; 2023 OptiWeb. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <!-- Chat Button -->
     <button class="chat-button" aria-label="Abrir chat de ayuda">💬</button>
+
+    <script>
+        // JavaScript para el carrusel automático
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+            
+            function moveToNextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel();
+            }
+            
+            function updateCarousel() {
+                const offset = -currentIndex * 100;
+                carousel.style.transform = `translateX(${offset}%)`;
+            }
+            
+            // Configurar el intervalo para cambiar de imagen cada 3 segundos
+            setInterval(moveToNextSlide, 3000);
+        });
+    </script>
 </body>
 </html>
